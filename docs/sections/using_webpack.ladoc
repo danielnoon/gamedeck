@@ -1,0 +1,101 @@
++++section
+title: Using Webpack?
++++
+
+If you want to use a module bundler for your game (you should!!) and don't know how,
+this is where you should be!
+
+Module bundlers take all of the code needed to run your program, minify them, and
+concatenate them all into one file. This is super useful for making small builds
+and standardizing how modules are resolved. Not all browsers support ES6 imports
+yet, so bundlers get rid of them completely.
+
+To get started with webpack as your module bundler, follow these steps:
+
+1. Install webpack.  
+   ```shell
+   $ npm i webpack webpack-cli
+   $ npm i -g webpack-cli  # this might require sudo
+   ```
+2. Install loaders. These are used to 
+  - If you are using TypeScript (highly recommended), install the typescript loader and typescript.  
+    ```shell
+    $ npm i ts-loader typescript
+    ```
+  - If you are using vanilla JavaScript, install the babel loader and babel.  
+    ```shell
+    $ npm i babel-loader @babel/core @babel/preset-env
+    ```
+  - In both cases, you may want to install a static file loader to load your index.html and assets.
+    ```shell
+    $ npm i file-loader
+    ```
+3. Create a `webpack.config.js` file.
+
++++example
+type: none
+template: none
+name: Webpack Config
++++
+
+```javascript:webpack.config.js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.ts',
+  module: {
+    rules: [
+      // This rule loads TypeScript files 
+      // and transpiles them into JavaScript.
+
+      // Check out https://github.com/babel/babel-loader
+      // if you want to use JavaScript instead.
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      // This rule simply moves your index.html file
+      // to the root of your dist folder.
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            },
+          },
+        ],
+      },
+      // For images.
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'img',
+              name: '[hash].[ext]'
+            },
+          },
+        ],
+      },
+    ]
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ]
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  devtool: 'source-map',
+  mode: "development"
+};
+```
+
+---
+
+Yay! You got webpack working! Or, maybe you didn't, in which case try again or check
+the documentation for webpack at [webpack.js.org](https://webpack.js.org).

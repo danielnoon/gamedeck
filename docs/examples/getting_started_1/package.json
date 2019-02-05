@@ -1,17 +1,11 @@
 {
-  "name": "gamedeck",
-  "version": "0.1.0",
-  "description": "Declarative 2D Game Framework",
-  "main": "/lib/Game.js",
-  "files": [
-    "/lib",
-    "/docs"
-  ],
+  "name": "gamedeck-example-1",
+  "version": "0.0.1",
+  "description": "",
   "scripts": {
-    "build": "tsc",
     "serve": "run-p serve:*",
-    "serve:serve": "serve test-out",
-    "serve:webpack": "webpack --config webpack-test.config.js --watch"
+    "serve:serve": "serve dist",
+    "serve:webpack": "webpack --config webpack.config.js --watch"
   },
   "author": "Daniel Noon",
   "license": "MIT",
@@ -27,6 +21,5 @@
   },
   "dependencies": {
     "ms": "^2.1.1"
-  },
-  "ladoc": "docs/index.ladoc"
+  }
 }

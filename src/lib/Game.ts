@@ -1,6 +1,9 @@
 import { Scene } from "./Scene";
 import { GObject } from "./GObject";
 import ms from 'ms';
+import { Vector2 } from "./Utils";
+import { Input, Listenable } from "./Input";
+import { Rectangle } from "./assets/Rectangle";
 
 interface ITimer {
   frame?: number;
@@ -9,12 +12,24 @@ interface ITimer {
   id: string;
 }
 
+class RootGObject extends GObject {
+  constructor(width: number, height: number) {
+    super({
+      position: new Vector2(0, 0),
+      dimensions: new Vector2(width, height),
+      scale: 1,
+      rotation: 0
+    })
+  }
+}
+
 export class Game {
   currentScene?: Scene;
   canvasContext: CanvasRenderingContext2D;
   canvasElement: HTMLCanvasElement;
   frame = 0;
   timers: ITimer[] = [];
+  input: Input<Window>;
 
   public setTimer(id: string, delay: string, callback: () => void) {
     const split = delay.split('');
@@ -62,22 +77,23 @@ export class Game {
     this.callCallbacks();
     if (this.currentScene) {
       this.currentScene.update(this);
-      const root = this.currentScene.build();
+      const root = this.currentScene.build(this);
       this.render(root);
     }
     this.frame++;
     requestAnimationFrame(() => this.loop());
   }
 
-  private render(obj: GObject) {
-    obj.render(this.canvasContext);
-
+  private render(obj: GObject, parent?: GObject) {
+    if (!parent) parent =
+      new RootGObject(this.canvasElement.width, this.canvasElement.height);
+    obj.render(this.canvasContext, parent);
     if (obj.children) {
       obj.children.forEach(child => {
         child.position.addM(obj.position);
         child.rotation += obj.rotation;
         child.scale += obj.scale;
-        this.render(child);
+        this.render(child, obj);
       });
     }
   }
@@ -102,6 +118,8 @@ export class Game {
       this.canvasElement.height = 300;
       document.body.appendChild(this.canvasElement);
     }
+    this.canvasElement.tabIndex = 1;
+    this.input = new Input(options.eventTarget ? options.eventTarget : window);
   }
 
   loadScene(scene: Scene) {
@@ -117,6 +135,7 @@ export class Game {
 
 export interface IGameOptions {
   canvas?: HTMLCanvasElement;
+  eventTarget?: Listenable;
 }
 
 export class GameOptions implements IGameOptions {

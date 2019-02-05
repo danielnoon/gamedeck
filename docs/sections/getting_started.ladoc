@@ -1,0 +1,84 @@
++++section
+title: Getting Started
++++
+
+GameDeck is an experiment of mine that aims to make writing code for video games
+more intuitive using the model of declarative programming many popular UI
+libraries use today. Getting started is pretty simple.
+If you don't want to go through this setup, I'll make a template you can use.
+At some point, that template will be at my [GitHub](https://github.com/Supermegadex/gamedeck-template).
+
+1. Install the library.  
+```shell
+$ npm i gamedeck
+```
+2. If you want to use TypeScript, install it.  
+```shell
+$ npm i typescript
+```
+3. I recommend using a module bundler. If you don't know what that is,
+use Webpack. Install it with  
+```shell
+$ npm i webpack webpack-cli
+``` 
+and check out the
+**Using Webpack?** section.
+
+4. Set up your html document.
+
++++example
+name: HTML Template
+type: none
+template: none
++++
+
+```html:src/index.html
+<!doctype html>
+<html>
+  <head>
+    <title>Test Game</title>
+  </head>
+  <body>
+    <canvas width="800" height="800">Get a new browser, silly!</canvas>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+---
+
+5. Bootstrap the game.
+
++++example
+name: Bootstrap Template
+path: getting_started_1
+template: custom
+type: node
++++
+
+```typescript:src/index.ts
+import './index.html';
+import { startGame, gobjects, Scene } from 'gamedeck';
+
+class Scene1 extends Scene {
+  build() {
+    return new gobjects.Background({
+      color: '#eeeeee',
+      children: [
+        new gobjects.Rectangle({
+          x: 20,
+          y: 20,
+          width: 10,
+          height: 10,
+          color: 'blue'
+        })
+      ]
+    })
+  }
+}
+
+const canvas = document.querySelector('canvas');
+const game = startGame(new Scene1(), canvas ? {canvas} : {});
+```
+---
+
+More coming soon.

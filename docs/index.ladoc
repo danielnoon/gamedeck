@@ -1,0 +1,13 @@
++++project
+name: GameDeck
+description: A declarative approach to games.
+examplesDirectory: examples
++++
+
++++include
+file: sections/getting_started
++++
+
++++include
+file: sections/using_webpack
++++
