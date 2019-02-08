@@ -1,6 +1,6 @@
 {
   "name": "gamedeck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Declarative 2D Game Framework",
   "main": "/lib/index.js",
   "files": [
