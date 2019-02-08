@@ -20,3 +20,8 @@ GameDeck's API docs can be read using [LibAssist](https://github.com/Supermegade
 
 ## Contributing
 Please do!
+
+## Roadmap
+1. Add a few more built-in GObjects/Assets
+2. Make a camera system
+3. Create a physics system

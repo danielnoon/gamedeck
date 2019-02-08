@@ -3,6 +3,8 @@ import { Vector2 } from "../Utils";
 import { Rectangle } from "../assets/Rectangle";
 
 export class Background extends GObject {
+  color: string;
+
   constructor(props: {
     color: string,
     children?: GObject[],
@@ -15,10 +17,11 @@ export class Background extends GObject {
       rotation: 0,
       children: props.children
     });
-    this.sprite = new Rectangle(this.dimensions.getX(), this.dimensions.getY(), props.color);
+    this.color = props.color;
   }
 
   update(ctx: CanvasRenderingContext2D, parent: GObject) {
     this.dimensions = parent.dimensions;
+    this.sprite = new Rectangle(this.dimensions.getX(), this.dimensions.getY(), this.color);
   }
 }
