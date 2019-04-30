@@ -61,7 +61,7 @@ class FirstScene extends Scene {
             game.canvasElement.width - 96,
             game.canvasElement.height - 96
           )
-        }),
+        }), // Door
         new Dot(this.dotState) //Dot
       ],
       dimensions: new Vector2(game.canvasElement.width, game.canvasElement.height)

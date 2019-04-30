@@ -9,15 +9,21 @@ export class Rectangle extends GObject {
     height: number,
     x: number,
     y: number,
+    color: string,
     scale?: number,
     rotation?: number,
-    color: string
+    children?: GObject[],
+    id?: string,
+    className?: string
   }) {
     super({
       dimensions: new Vector2(props.width, props.height),
       position: new Vector2(props.x, props.y),
       scale: props.scale,
-      rotation: props.rotation
+      rotation: props.rotation,
+      children: props.children,
+      id: props.id,
+      className: props.className
     });
     const d = this.dimensions.getCoords();
     const p = this.position.getCoords();

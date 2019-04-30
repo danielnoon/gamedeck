@@ -7,19 +7,23 @@ export class Dot extends GObject {
     x?: number,
     y?: number,
     position?: Vector2,
-    radius?: number,
+    radius: number,
     color?: string,
-    children?: GObject[]
+    children?: GObject[],
+    id?: string,
+    className?: string
   }, state?: DotState) {
-    let {x, y, radius, color, children, position} = props;
+    let {x, y, radius, color, children, position, id, className} = props;
     super({
-      position: (state ? state.position : null) || position || new Vector2(x || 0, y || 0),
-      dimensions: new Vector2((radius || 1) * 2, (radius || 1) * 2),
+      position: position || new Vector2(x || 0, y || 0),
+      dimensions: new Vector2(radius * 2, radius * 2),
       scale: 1,
       rotation: 0,
-      children
+      children,
+      id,
+      className
     });
-    radius = (state ? state.radius : null) || radius || 1;
+    radius = (state ? state.radius : null) || radius;
     color = (state ? state.color : null) || color || 'black';
     this.sprite = new Ellipse(radius, radius, color);
   }

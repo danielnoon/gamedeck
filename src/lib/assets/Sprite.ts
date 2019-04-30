@@ -28,8 +28,8 @@ export class Sprite extends Asset {
       this.sprite,
       this.x || 0,
       this.y || 0,
-      this.width,
-      this.height,
+      this.cropWidth || this.width,
+      this.cropHeight || this.height,
       owner.position.getX(),
       owner.position.getY(),
       this.width,
@@ -42,7 +42,9 @@ export class Sprite extends Asset {
     private width: number,
     private height: number,
     private x?: number,
-    private y?: number
+    private y?: number,
+    private cropWidth?: number,
+    private cropHeight?: number
   ) {
     super();
     if (Images.Exists(src)) {

@@ -1,7 +1,7 @@
 export class Vector2 {
-  constructor(private x: number, private y: number) {}
+  constructor(public x: number, public y: number) {}
 
-  getCoords() {
+  getCoords(): [number, number] {
     return [this.x, this.y];
   }
 
@@ -71,5 +71,14 @@ export class Vector2 {
 
   getMagnitude() {
     return Math.sqrt((this.x ** 2) + (this.y ** 2));
+  }
+
+  scalar(num: number) {
+    return new Vector2(this.x * num, this.y * num);
+  }
+
+  scalarM(num: number) {
+    this.x = this.x * num;
+    this.y = this.y * num;
   }
 }
