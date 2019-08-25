@@ -18,10 +18,6 @@ export class Background extends GObject {
       children: props.children
     });
     this.color = props.color;
-  }
-
-  update(ctx: CanvasRenderingContext2D, parent: GObject) {
-    this.dimensions = parent.dimensions;
     this.sprite = new Rectangle(this.dimensions.getX(), this.dimensions.getY(), this.color);
   }
 }

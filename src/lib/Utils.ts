@@ -81,4 +81,11 @@ export class Vector2 {
     this.x = this.x * num;
     this.y = this.y * num;
   }
+
+  static fromMagAndD(magnitude: number, direction: number) {
+    const rad = direction * Math.PI / 180;
+    const x = magnitude * Math.cos(rad);
+    const y = magnitude * Math.sin(rad);
+    return new Vector2(x, y);
+  }
 }
