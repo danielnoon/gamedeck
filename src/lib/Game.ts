@@ -98,6 +98,7 @@ export class Game {
   private render(obj: GObject, parent?: GObject) {
     if (!parent) parent =
       new RootGObject(this.width, this.height);
+    obj.prepare(this);
     if (obj.id) {
       this.flatLookupId.set(obj.id, obj);
     }
@@ -118,7 +119,7 @@ export class Game {
     if (children instanceof GObject) children = [children];
     if (children) {
       children.forEach(child => {
-        child.position.addM(obj.position);
+        child.position = child.position.add(obj.position);
         child.rotation += obj.rotation;
         child.scale += obj.scale;
         this.render(child, obj);

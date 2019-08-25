@@ -39,4 +39,6 @@ export abstract class GObject {
   build(game: Game): GObject | GObject[] {
     return this.children || [];
   }
+
+  prepare(game: Game): void {}
 }
