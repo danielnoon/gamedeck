@@ -17,7 +17,7 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "file-loader": "^3.0.1",
-    "serve": "^10.1.1"
+    "serve": "^10.1.2"
   },
   "dependencies": {
     "ms": "^2.1.1"
